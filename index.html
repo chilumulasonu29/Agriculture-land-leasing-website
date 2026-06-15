@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agriculture Land Leasing</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
+    header { background:#4CAF50; color:white; padding:20px; text-align:center; }
+    section { padding:20px; }
+    .card {
+      background:white; padding:15px; margin:15px 0;
+      border-radius:5px; box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width:100%; height:auto; border-radius:5px; margin-bottom:10px;
+    }
+    .btn {
+      background:#4CAF50; color:white; border:none;
+      padding:10px 15px; border-radius:3px; cursor:pointer;
+    }
+    form input, form button {
+      width:100%; padding:10px; margin:10px 0;
+      border:1px solid #ccc; border-radius:3px;
+    }
+    form button { background:#4CAF50; color:white; border:none; cursor:pointer; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>🌱 Agriculture Land Leasing</h1>
+    <p>Find and lease farmland easily</p>
+  </header>
+
+  <!-- Register Section -->
+  <section id="register-section">
+    <h2>Registration</h2>
+    <form onsubmit="register(event)" method="POST">
+      <label>Name:</label>
+      <input type="text" name="name" required><br>
+
+      <label>Email:</label>
+      <input type="email" name="email" required><br>
+
+      <label>Password:</label>
+      <input type="password" name="password" required><br>
+
+      <label>Register as:</label>
+      <select name="role" required>
+        <option value="landowner">Landowner</option>
+        <option value="farmer">Farmer</option>
+      </select><br>
+
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
+  <!-- Login Section (hidden initially) -->
+  <section id="login-section" style="display:none;">
+    <h2>Login</h2>
+    <form onsubmit="login(event)" method="POST">
+      <label>Email:</label>
+      <input type="email" name="email" required><br>
+
+      <label>Password:</label>
+      <input type="password" name="password" required><br>
+
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  <!-- Available Lands Section (hidden initially) -->
+  <section id="lands-section" style="display:none;">
+    <h2>Available Lands</h2>
+
+    <!-- Land Card 1 -->
+    <div class="card">
+      <img id="land1-img" src="farm1.jpg" alt="Farm Land - 2 Acres">
+      <h3>Farm Land - 2 Acres</h3>
+      <p>Location: Hyderabad</p>
+      <p>Soil: Black Soil</p>
+      <p>Price: ₹50,000 per year</p>
+      <button class="btn" onclick="leaseLand('Farm Land - 2 Acres, Hyderabad')">Lease Now</button>
+    </div>
+
+    <!-- Land Card 2 -->
+    <div class="card">
+      <img id="land2-img" src="farm2.jpg" alt="Organic Farm - 5 Acres">
+      <h3>Organic Farm - 5 Acres</h3>
+      <p>Location: Ramagundam</p>
+      <p>Soil: Sandy Loam</p>
+      <p>Price: ₹1,20,000 per year</p>
+      <button class="btn" onclick="leaseLand('Organic Farm - 5 Acres, Ramagundam')">Lease Now</button>
+    </div>
+
+    <!-- Land Card 3 -->
+    <div class="card">
+      <img id="land3-img" src="farm3.jpg" alt="Hillside Farm - 3 Acres">
+      <h3>Hillside Farm - 3 Acres</h3>
+      <p>Location: Godavarikhani</p>
+      <p>Soil: Red Soil</p>
+      <p>Price: ₹80,000 per year</p>
+      <button class="btn" onclick="leaseLand('Hillside Farm - 3 Acres, Godavarikhani')">Lease Now</button>
+    </div>
+  </section>
+
+  <script>
+    function register(event) {
+      event.preventDefault();
+      document.getElementById("register-section").style.display = "none";
+      document.getElementById("login-section").style.display = "block";
+    }
+
+    function login(event) {
+      event.preventDefault();
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("lands-section").style.display = "block";
+
+      // Load saved images from localStorage
+      ['land1-img','land2-img','land3-img'].forEach(id => {
+        const saved = localStorage.getItem(id);
+        if (saved) document.getElementById(id).src = saved;
+      });
+    }
+
+    // ✅ New function to handle Lease Now
+    function leaseLand(landName) {
+      localStorage.setItem("selectedLand", landName);
+      window.location.href = "booking.html";
+    }
+  </script>
+</body>
+</html>

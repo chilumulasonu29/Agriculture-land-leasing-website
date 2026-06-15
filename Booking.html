@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lease Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #4CAF50, #81C784); /* green gradient background */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+      color: #4CAF50;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Lease Booking</h2>
+    <!-- ✅ Action points to backend route -->
+    <form action="http://localhost:3000/book" method="POST">
+
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="tel" name="phone" placeholder="Your Phone Number" required>
+      
+      <!-- Lease duration dropdown -->
+      <select name="duration" required>
+        <option value="">Select Lease Duration</option>
+        <option value="1 year">1 Year</option>
+        <option value="2 years">2 Years</option>
+        <option value="3 years">3 Years</option>
+        <option value="5 years">5 Years</option>
+      </select>
+
+      <!-- Hidden field for land details -->
+      <input type="hidden" name="land" id="selected-land" value="">
+
+      <button type="submit">Confirm Lease</button>
+    </form>
+  </div>
+
+  <script>
+    // ✅ Pull selected land from localStorage (set in index.html)
+    document.addEventListener("DOMContentLoaded", () => {
+      const land = localStorage.getItem("selectedLand");
+      if (land) {
+        document.getElementById("selected-land").value = land;
+      }
+    });
+  </script>
+
+</body>
+</html>
